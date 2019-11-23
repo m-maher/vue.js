@@ -1,0 +1,72 @@
+<DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Vue</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    </head>
+
+    <body>
+
+        <div id="vapp">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-3">
+                        <select class="form-control" v-model="selected" @change="getPhotosById(selected)">
+                            <option disabled >Select</option>
+                            <option v-for="category in categories" v-bind:value="category" @>{{ category }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <span>Selected: {{ selected }}</span>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <form  class="form-group" v-on:submit.prevent="handleSubmit()">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Title</label>
+                                    <input type='text' id ='title' class="form-control" v-model="title" required />
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <input type="submit" class="btn btn-primary submit-btn w-100" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Album ID</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="image" v-bind:key="photo.id" v-for="photo in photos">
+                                    <td>{{photo.albumId}}</td>
+                                    <td>{{photo.id}}</td>
+                                    <td>{{photo.title}}</td>
+                                    <td><button class="btn btn-danger mr-3" v-on:click="deletePhoto(photo.id)">Delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 load-more-container">
+                        <button class="btn btn-primary btn-block">Load More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/vue.js"></script>
+        <script src="./js/axios.min.js"></script>
+        <script src="./main.js"></script>
+
+    </body>
+
+</html>
